@@ -1,6 +1,6 @@
 RSpec tests for Service Dependencies
 
-##USAGE 
+## USAGE 
 
 Add the following to Rakefile: 
 
