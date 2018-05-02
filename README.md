@@ -43,7 +43,6 @@ deps:
     desc: Should be able to hit https://www.google.com
     
   - type: command
-    run_as: nobody
     command: ping -c 1 8.8.8.8
     timeout: 2 
     desc: Should be able to ping 8.8.8.8
