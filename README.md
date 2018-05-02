@@ -4,7 +4,7 @@ RSpec tests for Service Dependencies
 
 Add the following to Rakefile: 
 
-```
+```ruby
 require 'svcdeps_tasks'
 
 ENV['SVCDEPS_PATH'] = '/etc/svcdeps'
@@ -12,7 +12,7 @@ ENV['SVCDEPS_PATH'] = '/etc/svcdeps'
 
 And save yaml files  describing how to check the  service dependencies, like: 
 
-```
+```yaml
 deps: 
   - type: tcp
     host: www.google.com
