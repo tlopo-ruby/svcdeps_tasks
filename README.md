@@ -2,15 +2,24 @@
 
 ### USAGE 
 
-Add the following to Rakefile: 
+1. Install the gem
+```bash 
+gem install svcdeps_tasks
+```
 
+2. Add the following to Rakefile: 
 ```ruby
 require 'svcdeps_tasks'
 
 ENV['SVCDEPS_PATH'] = '/etc/svcdeps'
 ```
 
-And save yaml files  describing how to check the  service dependencies, like: 
+3. Create a directory for dependencies manifests, `/ec/svcdeps` in our case: 
+```bash
+mkdir /etc/svcdeps
+```
+
+4. Create dependencies manifests, which are yaml files describing how to check the  service dependencies: 
 
 ```yaml
 deps: 
@@ -34,13 +43,12 @@ deps:
     desc: Should be able to hit https://www.google.com
     
   - type: command
-    run_as: nobody
     command: ping -c 1 8.8.8.8
     timeout: 2 
     desc: Should be able to ping 8.8.8.8
 ```
 
-Running: 
+5. Run: 
 
 ```
 # rake spec:svcdeps
