@@ -13,6 +13,8 @@ raise "Environment variable 'SVCDEPS_PATH' must be set" unless deps_dir
 
 Dir.chdir(deps_dir)
 Dir.glob(File.join('**','*.yaml')).each {|f| deps_files << "#{deps_dir}/#{f}" } 
+Dir.glob(File.join('**','*.yml')).each {|f| deps_files << "#{deps_dir}/#{f}" } 
+
 
 def symbolize_keys(hash)
    hash.inject({}){|memo,(k,v)| memo[k.to_sym] = v ; memo }
@@ -29,5 +31,5 @@ describe 'Service Dependencies' do
       p = Probe.new( dep ) 
       expect { p.run }.to_not raise_error
     end
-  end
+  end if deps['deps']
 end
