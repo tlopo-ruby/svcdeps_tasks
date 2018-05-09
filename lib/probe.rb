@@ -33,7 +33,6 @@ class Probe
   def command_probe
     cmd =  @opts[:command]
     run_as = @opts[:run_as]
-    
     if run_as.nil? 
       run_as = 'nobody' if Process.uid.zero?
     else
@@ -42,7 +41,7 @@ class Probe
     end 
 
     Timeout::timeout(@timeout) do 
-      user = Etc.getpwnam('nobody')
+      user = Etc.getpwnam(run_as)
       pid = Process.fork do
         STDOUT.reopen('/dev/null')
         STDERR.reopen('/dev/null')
