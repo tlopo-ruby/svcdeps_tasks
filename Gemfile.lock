@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    svcdeps_tasks (0.1.4)
+    svcdeps_tasks (0.1.5)
       deep_merge (~> 1.2)
       rspec (~> 3.7)
 
