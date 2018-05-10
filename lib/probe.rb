@@ -74,10 +74,27 @@ class Probe
        
       headers.each {|k,v| req[k] = v }
     
-      opts = {} 
+      opts = {}
+
+      if is_https
+        if @opts[:ca_file] 
+          opts[:ca_file] = @opts[:ca_file]
+        end
+        
+        if @opts[:cert_file] 
+          opts[:cert] = OpenSSL::X509::Certificate.new( File.read @opts[:cert_file] )
+        end
+  
+        if @opts[:key_file] 
+          opts[:key] =  OpenSSL::PKey::RSA.new( File.read @opts[:key_file] )
+        end
+      end
+ 
       opts[:use_ssl] = is_https 
       opts[:verify_mode] = OpenSSL::SSL::VERIFY_NONE if is_https && insecure 
-    
+   
+      p [opts]   
+ 
       Net::HTTP.start( uri.host, uri.port, opts ) do |http|
         res = http.request(req)
         raise "Request to #{url} returned code #{res.code}" unless res.code == '200'
