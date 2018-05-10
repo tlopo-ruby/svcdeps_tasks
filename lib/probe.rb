@@ -93,8 +93,6 @@ class Probe
       opts[:use_ssl] = is_https 
       opts[:verify_mode] = OpenSSL::SSL::VERIFY_NONE if is_https && insecure 
    
-      p [opts]   
- 
       Net::HTTP.start( uri.host, uri.port, opts ) do |http|
         res = http.request(req)
         raise "Request to #{url} returned code #{res.code}" unless res.code == '200'
