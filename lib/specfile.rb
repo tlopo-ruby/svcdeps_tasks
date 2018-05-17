@@ -31,7 +31,7 @@ describe 'Service Dependencies' do
     dep = symbolize_keys(dep)
     it "#{dep[:desc]}" do 
       p = Probe.new( dep ) 
-      expect(p.run)  == 'SUCCESS'
+      expect(p.run).to be  == 'SUCCESS'
     end
   end if deps['deps']
 end
