@@ -40,8 +40,8 @@ class Probe
       run_as = nil unless Process.uid.zero? 
     end 
 
-    Timeout::timeout(@timeout) do 
-      user = Etc.getpwnam(run_as)
+    Timeout::timeout(@timeout) do
+      user = Etc.getpwnam(run_as) if run_as
       pid = Process.fork do
         STDOUT.reopen('/dev/null')
         STDERR.reopen('/dev/null')
@@ -100,16 +100,26 @@ class Probe
     end
   end
 
+  def error_wrapper(&block) 
+    begin 
+      instance_eval(&block) if block_given?
+      raise 'block should be passed to error_wrapper' unless block_given?
+    rescue => e 
+      return "#{e.class} => #{e.message}"
+    end
+    "SUCCESS"
+  end
+
   def run 
     case @type 
       when 'tcp'
-        tcp_probe 
+        error_wrapper { tcp_probe }
       when 'udp'
-        udp_probe
+        error_wrapper { udp_probe }
       when 'command'
-        command_probe
+        error_wrapper { command_probe }
       when 'http'
-        http_probe
+        error_wrapper { http_probe }
       else 
         raise "Type '#{@type}' not supported"
     end

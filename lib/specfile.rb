@@ -1,4 +1,5 @@
 require 'rspec'
+
 set :backend, :exec
 
 dir = File.dirname(File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__)
@@ -30,7 +31,7 @@ describe 'Service Dependencies' do
     dep = symbolize_keys(dep)
     it "#{dep[:desc]}" do 
       p = Probe.new( dep ) 
-      expect { p.run }.to_not raise_error
+      expect(p.run)  == 'SUCCESS'
     end
   end if deps['deps']
 end
