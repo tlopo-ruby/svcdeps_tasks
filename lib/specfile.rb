@@ -1,6 +1,6 @@
 require 'rspec'
 
-set :backend, :exec
+#set :backend, :exec
 
 dir = File.dirname(File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__)
 require "#{dir}/probe"

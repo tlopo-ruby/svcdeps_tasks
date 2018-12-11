@@ -11,6 +11,7 @@ namespace :spec do
       c.add_formatter(:documentation)
      end
    
-    RSpec::Core::Runner.run(["#{dir}/specfile.rb"],STDOUT, STDERR)
+    RSpec::Core::Runner.run(["#{dir}/specfile.rb"])
+    raise "RSpec exit status #{$?.exitstatus}" unless $?.success?
   end
 end

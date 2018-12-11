@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    svcdeps_tasks (0.1.7)
+    svcdeps_tasks (0.1.8)
       deep_merge (~> 1.2)
       rspec (~> 3.7)
 
@@ -36,4 +36,4 @@ DEPENDENCIES
   svcdeps_tasks!
 
 BUNDLED WITH
-   1.16.1
+   1.16.5
